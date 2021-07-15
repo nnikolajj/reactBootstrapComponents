@@ -1,11 +1,14 @@
 import logo from './logo.svg';
 import './App.css';
 import {useRef, useState} from "react";
+import {CartesianGrid, Line, LineChart, XAxis, YAxis} from "recharts";
+import { PieChart, Pie, Sector, Cell } from "recharts";
 
 function App() {
     const [counter, setCounter]=useState(0)
     const [fieldValue, setFieldValue]=useState(0)
     const [valueR, setValueR]=useState(' ')
+    const [valueCB, setValueCB]=useState(' ')
 
     const fieldkgValue=useRef(0)
     const fieldcmValue=useRef(0)
@@ -18,11 +21,12 @@ function App() {
 
     const [anzeige, setAnzeige]=useState(0)
 
+    const data = [];
+
+    const COLORS = ["#0088FE"];
 
     let nicknames=[" - ","Banana","Juicy","Smasher","Nerd","Fish","Smoke","Hunter","AshenOne","Steve","Gerald","Frieda","Dose","Hose",
                     "Lord","Gras","Saga","Cinder","Sport","Diggah","Cool","Lost","HEHE","Death","Monster","Tron"]
-
-
 
     let geschlecht = false;
 
@@ -57,14 +61,12 @@ function App() {
     function bmiRechner(){
         let a=fieldcmValue.current.value*fieldcmValue.current.value
             setBMI(Math.floor(fieldkgValue.current.value/a))
+        let b= Math.floor(fieldkgValue.current.value/a)
+        data.push({
+            name: "Group A", value: b
+        })
+        console.log(data)
     }
-    function m(){
-        geschlecht=false;
-    }
-    function w(){
-        geschlecht=true;
-    }
-
 
     /**
      * Select
@@ -128,8 +130,6 @@ function App() {
         <br/>
         <br/>
         Ihr Geschlecht
-        <button onClick={m}>m</button>
-        <button onClick={w}>w</button>
         <br/>
         Ihr Gewicht(kg)
         <input ref={fieldkgValue}/>
@@ -140,6 +140,24 @@ function App() {
         <button onClick={bmiRechner}>SENDEN</button>
         <br/>
         { bmi }
+        <br/>
+        <br/>
+        <PieChart width={800} height={400}>
+            <Pie
+                data={data}
+                cx={120}
+                cy={200}
+                innerRadius={60}
+                outerRadius={80}
+                fill="#8884d8"
+                paddingAngle={5}
+                dataKey="value"
+            >
+                {data.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                ))}
+            </Pie>
+        </PieChart>
         <br/>
         <br/>
         <br/>
@@ -184,7 +202,24 @@ function App() {
         <button onClick={radioSave}>SENDEN</button>
         <br/>
         {valueR}
-
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        CHECKBOX
+        <br/>
+        <input onChange={e=>setValueCB(e.currentTarget.value)} type="checkbox" id="one" name="checkBox" value="1"/>
+            <label htmlFor="one">Option 1</label>
+        <br/>
+        <input onChange={e=>setValueCB(e.currentTarget.value)} type="checkbox" id="two" name="checkBox" value="2"/>
+        <label htmlFor="two">Option 2</label>
+        <br/>
+        <input onChange={e=>setValueCB(e.currentTarget.value)} type="checkbox" id="three" name="checkBox" value="3"/>
+        <label htmlFor="three">Option 3</label>
+        <br/>
+        <button onClick={radioSave}>SENDEN</button>
+        <br/>
+        {valueCB}
 
     </div>
   );
