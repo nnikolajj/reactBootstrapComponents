@@ -25,6 +25,7 @@ import DayPickerComponent from "./DayPickerComponent";
 import ReactDOM from "react-dom";
 import RouterJokes from "./RouterJokes";
 import SearchFieldComponent from "./SearchFieldComponent";
+import RouterKontext from "./RouterKontext";
 
 export default function MainRouter() {
 
@@ -68,6 +69,9 @@ export default function MainRouter() {
                         <Col>
                             <Link to={"/jumbotron"}>Jumbotron</Link></Col>
                         <Col>
+                            <Link to={"/routerkontext"}>Router Kontext</Link>
+                        </Col>
+                        <Col>
                             <Link to={"/jokesrouter"}>Jokes</Link>
                         </Col>
                     </Row>
@@ -95,6 +99,7 @@ export default function MainRouter() {
                 <Route path="/daypicker" component={DayPickerComponent}/>
                 <Route path="/jokesrouter" component={RouterJokes}/>
                 <Route path="/searchfield" component={SearchFieldComponent}/>
+                <Route path="/routerkontext" component={RouterKontext}/>
             </Switch>
         </div>
 

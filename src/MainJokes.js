@@ -6,8 +6,10 @@ import Zug from "./Zug";
 import Jokes from "./Jokes";
 
 export default function MainJokes() {
+
     const [text, setText] = useState([]);
     const [lang, setLang]=useState([])
+    const [bl, setBl]=useState([])
     const [colorP, setColorP] = useState("link")
     const [colorM, setColorM] = useState("link")
     const [colorD, setColorD] = useState("link")
@@ -15,6 +17,12 @@ export default function MainJokes() {
     const [colorS, setColorS] = useState("link")
     const [colorC, setColorC] = useState("link")
     const [colorG, setColorG] = useState("link")
+    const [colorBn, setColorBn] = useState("link")
+    const [colorBr, setColorBr] = useState("link")
+    const [colorBp, setColorBp] = useState("link")
+    const [colorBra, setColorBra] = useState("link")
+    const [colorBs, setColorBs] = useState("link")
+    const [colorBe, setColorBe] = useState("link")
 
 
     function btHandlerP() {
@@ -35,10 +43,12 @@ export default function MainJokes() {
     function btHandlerM() {
 
         if (text.includes('Miscellaneous')) {
+
             setText(text.filter(item => item !== 'Miscellaneous'))
 
             setColorM('link')
         } else {
+
             setText([...text,'Miscellaneous'])
             setColorM('primary')
 
@@ -118,11 +128,81 @@ export default function MainJokes() {
          console.log(lang)
 
     }
+    function btHandlerBn() {
+
+        if (bl.includes('nsfw')) {
+            setBl(bl.filter(item => item !== 'nsfw'))
+            setColorBn('link')
+        } else {
+            setBl([...bl,'nsfw'])
+            setColorBn('primary')
+        }
+    }
+    function btHandlerBr() {
+
+        if (bl.includes('religious')) {
+            setBl(bl.filter(item => item !== 'religious'))
+            setColorBr('link')
+        } else {
+            setBl([...bl,'religious'])
+            setColorBr('primary')
+        }
+    }
+    function btHandlerBp() {
+
+        if (bl.includes('political')) {
+            setBl(bl.filter(item => item !== 'political'))
+            setColorBp('link')
+        } else {
+            setBl([...bl,'political'])
+            setColorBp('primary')
+        }
+    }
+    function btHandlerBra() {
+
+        if (bl.includes('racist')) {
+            setBl(bl.filter(item => item !== 'racist'))
+            setColorBra('link')
+        } else {
+            setBl([...bl,'racist'])
+            setColorBra('primary')
+        }
+    }
+    function btHandlerBs() {
+
+        if (bl.includes('sexist')) {
+            setBl(bl.filter(item => item !== 'sexist'))
+            setColorBs('link')
+        } else {
+            setBl([...bl,'sexist'])
+            setColorBs('primary')
+        }
+    }
+    function btHandlerBe() {
+
+        if (bl.includes('explicit')) {
+            setBl(bl.filter(item => item !== 'explicit'))
+            setColorBe('link')
+        } else {
+            setBl([...bl,'explicit'])
+            setColorBe('primary')
+        }
+    }
 
 
     return (
         <div>
             <br/>
+            <Container>
+               <Row>
+                   <Col/>
+                   <Col>
+                       Category
+                       <hr/>
+                   </Col>
+                   <Col/>
+               </Row>
+            </Container>
             <ButtonGroup>
             <Button type="button" variant={colorP} onClick={btHandlerP}>Programming</Button>
             <Button type="button" variant={colorM} onClick={btHandlerM}>Misc</Button>
@@ -130,7 +210,44 @@ export default function MainJokes() {
             <Button type="button" variant={colorPu} onClick={btHandlerPu}>Pun</Button>
             <Button type="button" variant={colorS} onClick={btHandlerS}>Spooky</Button>
             <Button type="button" variant={colorC} onClick={btHandlerC}>Christmas</Button>
-            <Button type="button" variant={colorG} onClick={btHandlerG}>German</Button>
+
+            </ButtonGroup>
+            <br/>
+            <br/>
+            <br/>
+            <Container>
+                <Row>
+                    <Col/>
+                    <Col>
+                        Blacklist
+                        <hr/>
+                    </Col>
+                    <Col/>
+                </Row>
+            </Container>
+            <ButtonGroup>
+                <Button type="button" variant={colorBn} onClick={btHandlerBn}>nsfw</Button>
+                <Button type="button" variant={colorBr} onClick={btHandlerBr}>religious</Button>
+                <Button type="button" variant={colorBp} onClick={btHandlerBp}>political</Button>
+                <Button type="button" variant={colorBra} onClick={btHandlerBra}>racist</Button>
+                <Button type="button" variant={colorBs} onClick={btHandlerBs}>sexist</Button>
+                <Button type="button" variant={colorBe} onClick={btHandlerBe}>explicit</Button>
+            </ButtonGroup>
+            <br/>
+            <br/>
+            <br/>
+            <Container>
+                <Row>
+                    <Col/>
+                    <Col>
+                        Category
+                        <hr/>
+                    </Col>
+                    <Col/>
+                </Row>
+            </Container>
+            <ButtonGroup>
+                <Button type="button" variant={colorG} onClick={btHandlerG}>German</Button>
             </ButtonGroup>
             <br/>
             <br/>
@@ -145,7 +262,7 @@ export default function MainJokes() {
             <Switch>
                 <Route path="/jokes" component={() => (
                     <Container>
-                    <Jokes atext={text} lang={lang}/>
+                    <Jokes atext={text} lang={lang} bl={bl}/>
 
                     </Container>
 

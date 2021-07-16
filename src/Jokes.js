@@ -2,12 +2,14 @@ import {useRef, useState} from "react";
 import {Form, Spinner} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
-export default function Jokes({atext, lang}) {
+export default function Jokes({atext, lang, bl}) {
     const [joke, setJoke] = useState([])
     const [spinnerVisible, setSpinnerVisible] = useState(false)
     const [enable, setEnable] = useState(false)
     let text = ""
+    let textbl = ""
     let one = true
+    let two = true
 
     const btHandler = () => {
         setSpinnerVisible(true)
@@ -29,20 +31,43 @@ export default function Jokes({atext, lang}) {
             }
             one = false
         }
+        if (two) {
+            for (let i = 0; i < bl.length; i++) {
+
+                if (i < (bl.length - 1)) {
+                    console.log("ddd"+bl[i])
+                    textbl = (textbl + bl[i] + ',')
+                } else {
+
+                    textbl = (textbl + bl[i])
+                }
+            }
+            two = false
+        }
+
         if (text === "") {
             search = 'https://v2.jokeapi.dev/joke/Any'
         } else {
             search = 'https://v2.jokeapi.dev/joke/' + text
 
         }
+
         console.log(lang)
         if (lang === "de") {
             search += "?lang=de"
         }
         console.log(search)
+        if (textbl !== ""){
+            if (lang === "de") {
+                search += "&blacklist="+textbl
+            }
+            else {
+                search += "?blacklist="+textbl
+                console.log(search)
+            }
+        }
 
-
-        spleep(1500,() => fetch(search)
+        spleep(1000,() => fetch(search)
             .then(response => response.json())
             .then(data => {
                 setJoke(data)
@@ -93,7 +118,6 @@ export default function Jokes({atext, lang}) {
                 <br/>
                 {joke.lang}
                 <br/>
-                {joke.nsfw}
 
             </Form>
         </div>
